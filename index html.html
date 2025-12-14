@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maisarah's Student Bento Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /*
+         * --- Technical Rules ---
+         * 1. Use a single HTML file with internal CSS
+         * 2. Make it fully responsive (grid on desktop, stacked on mobile)
+         * 3. Use Inter font
+         * 4. Clean, scientific, and modern color palette (Ocean Blue Accent)
+         */
+
+        :root {
+            /* Colors */
+            --color-white: #ffffff;
+            --color-light-grey: #f5f7fa; /* Soft background */
+            --color-mid-grey: #e0e6ed;   /* Card borders/separators */
+            --color-dark-grey: #333333;  /* Main text */
+            --color-accent: #004c8c;     /* Deep Ocean Blue (UMT Theme) */
+            --color-accent-hover: #003366;
+            
+            /* Spacing */
+            --spacing-unit: 1rem;
+            --spacing-small: 0.5rem;
+            --spacing-medium: 1.5rem;
+
+            /* Typography */
+            --font-family-sans: 'Inter', sans-serif;
+            --font-size-base: 1rem;
+        }
+
+        /* Base Reset & Typography */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family-sans);
+            line-height: 1.6;
+            color: var(--color-dark-grey);
+            background-color: var(--color-light-grey);
+            padding: var(--spacing-medium);
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        p {
+            margin-bottom: var(--spacing-unit);
+        }
+
+        /* --- Bento Grid Layout --- */
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Default 4 columns for desktop */
+            gap: var(--spacing-unit);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: var(--color-white);
+            border: 1px solid var(--color-mid-grey);
+            border-radius: 12px;
+            padding: var(--spacing-medium);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden; /* For rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Card-Specific Styles (Desktop 4-column layout) */
+        
+        .card-profile {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .card-location {
+            grid-column: span 1;
+            grid-row: span 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .card-tech-stack {
+            grid-column: span 1;
+            grid-row: span 2;
+        }
+
+        .card-case-study {
+            grid-column: span 1;
+            grid-row: span 1;
+        }
+
+        .card-hobby {
+            grid-column: span 1;
+            grid-row: span 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card-playlist {
+            grid-column: 1 / -1; /* Spans all columns */
+            min-height: 120px;
+        }
+
+        /* Card Content Styling */
+
+        .card-header {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            margin-bottom: var(--spacing-small);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-unit);
+        }
+        
+        .card-profile .card-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-profile .profile-details {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: var(--color-dark-grey);
+            margin-bottom: var(--spacing-medium);
+        }
+        
+        .card-profile .tagline {
+            font-style: italic;
+            color: #555;
+            margin-top: 0.5rem;
+            margin-bottom: var(--spacing-unit);
+        }
+
+        .social-links a {
+            display: inline-block;
+            margin-right: var(--spacing-unit);
+            color: var(--color-dark-grey);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            transition: color 0.2s, background-color 0.2s;
+        }
+
+        .social-links a:hover {
+            color: var(--color-white);
+            background-color: var(--color-accent);
+        }
+
+        .subjects-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .subjects-list li {
+            background-color: var(--color-light-grey);
+            padding: 0.5rem 0.75rem;
+            margin-bottom: 0.5rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            border-left: 3px solid var(--color-accent);
+            transition: background-color 0.2s;
+        }
+
+        .subjects-list li:hover {
+            background-color: var(--color-mid-grey);
+        }
+
+        .location-text h3 {
+            font-size: 2rem;
+            color: var(--color-accent);
+            margin-bottom: 0.2rem;
+        }
+
+        .location-text p {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 0;
+        }
+
+        .location-text .time-placeholder {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--color-dark-grey);
+            margin-top: 1rem;
+        }
+
+        .case-study-details {
+            font-style: italic;
+            color: #555;
+        }
+        
+        .hobby-text h3 {
+            font-size: 1.5rem;
+            color: var(--color-dark-grey);
+            margin-bottom: 0.2rem;
+        }
+
+
+        /* --- Mobile Responsiveness (Stacked Layout) --- */
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr; /* Single column for mobile */
+            }
+
+            /* All cards should span the full width (1 column) */
+            .card {
+                grid-column: span 1 !important;
+                grid-row: span 1 !important;
+                min-height: auto; /* Allow height to adjust */
+            }
+
+            .card-profile .card-title {
+                font-size: 2rem;
+            }
+
+            .card-profile .profile-details {
+                font-size: 1rem;
+            }
+
+            .location-text h3 {
+                font-size: 1.5rem;
+            }
+
+            .location-text .time-placeholder {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="bento-grid">
+        
+        <div class="card card-profile">
+            <div>
+                <header class="card-header">Student Profile & Motto</header>
+                <h1 class="card-title">MAISARAH BINTI AHMAD TAKHIRUDIN</h1>
+                <p class="profile-details">B.Sc. Food Science Technology | Year 1</p>
+                <p class="tagline">**Innovating food safety.**</p>
+                <p>An enthusiastic first-year student dedicated to mastering the principles of food science and quality control.</p>
+            </div>
+            <div class="social-links">
+                <a href="#linkedin" target="_blank">LinkedIn</a>
+                <a href="#github" target="_blank">GitHub</a>
+                <a href="#umt-portal" target="_blank">UMT Portal</a>
+            </div>
+        </div>
+
+        <div class="card card-location">
+            <div class="location-text">
+                <header class="card-header">Current Location</header>
+                <h3>UMT</h3>
+                <p>Kuala Nerus, Terengganu</p>
+                <div class="time-placeholder">2:31 PM</div> </div>
+        </div>
+
+        <div class="card card-tech-stack">
+            <div>
+                <header class="card-header">Core Modules / Skills</header>
+                <h2 class="card-title">Current Semester Focus</h2>
+                <ul class="subjects-list">
+                    <li>Food Chemistry Fundamentals</li>
+                    <li>Food Microbiology Basic</li>
+                    <li>Data Analysis (Excel)</li>
+                    <li>Basic Lab Analysis Techniques</li>
+                </ul>
+                <p style="margin-top: var(--spacing-unit); font-size: 0.9rem; color: #666;">Building a strong scientific foundation for food R&D.</p>
+            </div>
+        </div>
+
+        <div class="card card-case-study">
+            <div>
+                <header class="card-header">Recent Experiment</header>
+                <h2 class="card-title">Starch Gelatinization in Local Kuih</h2>
+                <p class="case-study-details">**Description:** Analyzing texture profiles of *Kuih Lapis* using various starch sources and heating times.</p>
+                <p style="margin-top: var(--spacing-small); font-size: 0.9rem;">Focusing on the rheological properties and consumer preference mapping.</p>
+            </div>
+        </div>
+
+        <div class="card card-hobby">
+            <div class="hobby-text">
+                <header class="card-header">Relax & Recharge</header>
+                <h3 class="card-title" style="margin-bottom: 0.2rem;">Coastal Walks</h3>
+                <p style="margin-bottom: 0;">Evening walks at Pantai UMT</p>
+            </div>
+        </div>
+
+        <div class="card card-playlist">
+            <div>
+                <header class="card-header">Study Focus</header>
+                <h2 class="card-title" style="margin-bottom: 0.5rem;">Ambient Study Playlist</h2>
+                <p>Currently listening to: Lo-fi Study Beats (Placeholder for embedded player).</p>
+            </div>
+        </div>
+
+    </main>
+    
+</body>
+</html>
